@@ -1,5 +1,4 @@
-#ifndef RATIONALS_H
-# define RATIONALS_H 1
+# pragma once
 # include <stdbool.h>
 # include "euclid.h"
 
@@ -37,5 +36,3 @@ char const* rat_normalize_print(size_t len, char tmp[len],
                                 rat const* x);
 rat* rat_dotproduct(rat rp[static 1], size_t n,
                     rat const A[n], rat const B[n]);
-
-#endif

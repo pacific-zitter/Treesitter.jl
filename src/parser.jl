@@ -3,7 +3,6 @@ mutable struct Parser
     ptr::Ptr{Cvoid}
     function Parser()
         obj = new(ts_parser_new())
-
         finalizer(obj) do x
             ts_parser_delete(x.ptr)
         end
@@ -18,7 +17,6 @@ end
 function (P::Parser)(s::AbstractString)
     ts_parser_parse_string(P.ptr, C_NULL, s, length(s))
 end
-
 
 function children(node)
     l = ts_node_child_count(node)
