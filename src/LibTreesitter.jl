@@ -1,7 +1,7 @@
 module LibTreesitter
-import Libdl
+using Reexport
+@reexport using libtreesitter_jll
 
-const libtreesitter = joinpath(dirname(@__DIR__),"deps/usr/lib/libtreesitter.so")
 using CEnum
 
 include(joinpath(@__DIR__, "..", "gen", "common.jl"))
@@ -13,5 +13,5 @@ foreach(names(@__MODULE__, all=true)) do s
        @eval export $s
    end
 end
-export TSTreeCursor
+
 end # module LibTreesitter

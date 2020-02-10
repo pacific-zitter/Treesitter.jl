@@ -4,12 +4,9 @@ export Parser, set_language, tree_sitter_c, children
 export TSTreeCursor, current_node, current_fieldname, current_fieldid, goto_parent,
 goto_first_child, goto_next_sibling, deepcopy, getcursor
 
-
 include("LibTreesitter.jl")
 
 @reexport using .LibTreesitter
-
-const libtreesitter_c = joinpath(dirname(@__DIR__),"deps/tree-sitter-c/tree_sitter_c.so")
 
 tree_sitter_c() = ccall((:tree_sitter_c, libtreesitter_c), Ptr{Cvoid}, ())
 
