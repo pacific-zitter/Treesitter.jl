@@ -12,7 +12,7 @@ include("parser.jl")
 include("nodes.jl")
 include("treecursor.jl")
 foreach(names(@__MODULE__, all = true)) do s
-    if startswith(string(s), r"node|language|cursor"i)
+    if startswith(string(s), r"node|language|cursor|tree"i)
         @eval export $s
     end
 

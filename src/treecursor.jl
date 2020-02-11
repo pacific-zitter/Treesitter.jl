@@ -1,11 +1,9 @@
-struct TreeCursor
-    tscursor::Base.RefValue{TSTreeCursor}
-    current_node::Union{TSNode,Nothing}
-    next_node::Union{TSNode,Nothing}
+function LibTreesitter.TSTreeCursor(node::TSNode)
+    return ts_tree_cursor_new(node)
 end
 
-function tree_getcursor(node::TSNode)
-    ts_tree_cursor_new(node)
+function tree_getroot(tree::Ptr{TSTree})
+    ts_tree_root_node(tree)
 end
 
 function cursor_currentnode(ts::TSTreeCursor)
@@ -24,20 +22,25 @@ end
 
 function cursor_parent(T::TSTreeCursor)
     parent_exists = ts_tree_cursor_goto_parent(Ref(T))
-    parent_exists ? current_node(T) : nothing
+    parent_exists ? cursor_currentnode(T) : nothing
 end
 
 function cursor_next(T::TSTreeCursor)
     has_sibling = ts_tree_cursor_goto_next_sibling(Ref(T))
-    has_sibling ? current_node(T) : nothing
+    has_sibling ? cursor_currentnode(T) : nothing
 end
 
 function cursor_firstchild(T::TSTreeCursor)
     has_child = ts_tree_cursor_goto_first_child(Ref(T))
-    has_child ? current_node(T) : nothing
+    has_child ? cursor_currentnode(T) : nothing
 end
 
 function cursor_copy(T::TSTreeCursor)
     new_cursor = ts_tree_cursor_copy(Ref(T))
     return new_cursor
+end
+
+# Iterator interface.
+function Base.iterate(tree_cursor::TSTreeCursor)
+    cursor_next(tree_cursor)
 end
