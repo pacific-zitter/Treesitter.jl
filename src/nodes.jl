@@ -68,7 +68,7 @@ end
 
 """
     node_parent(node::TSNode)
-documentation
+Get the node's immediate parent.
 """
 function node_parent(node::TSNode)
     parent = ts_node_parent(node)
@@ -119,7 +119,7 @@ end
 """
     node_nextnamed(node::TSNode)
 
-documentation
+Get the node's next *named* sibling.
 """
 function node_nextnamed(node::TSNode)
     next = ts_node_next_named_sibling(node)
@@ -129,7 +129,7 @@ end
 """
     node_prevnamed(node::TSNode)
 
-documentation
+Get the node's previous *named* sibling.
 """
 function node_prevnamed(node::TSNode)
     prev = ts_node_prev_named_sibling(node)
@@ -139,7 +139,7 @@ end
 """
     node_namedchild_count(node::TSNode)
 
-documentation
+Get the node's number of *named* children.
 """
 function node_namedchild_count(node::TSNode)
     n = ts_node_named_child_count(node)
@@ -149,7 +149,7 @@ end
 """
 node_namedchild(node::TSNode, index)
 
-documentation
+Get the node's *named* child at the given index.
 """
 function node_namedchild(node::TSNode, index)
     cnode = ts_node_named_child(node, index - 1)
@@ -159,7 +159,7 @@ end
 """
     node_childby_fieldname(node::TSNode, fieldname::AbstractString)
 
-documentation
+Get the node's child with the given field name.
 """
 function node_childby_fieldname(node::TSNode, fieldname::AbstractString)
     child_node = ts_node_child_by_field_name(node, fieldname, length(fieldname))
@@ -169,7 +169,10 @@ end
 """
     node_childby_fieldid(node::TSNode, id)
 
-documentation
+Get the node's child with the given numerical field id.
+
+You can convert a field name to an id using the
+`ts_language_field_id_for_name` function.
 """
 function node_childby_fieldid(node::TSNode, id)
     child_node = ts_node_child_by_field_id(node, id)
@@ -180,7 +183,9 @@ end
 """
     node_startbyte(node::TSNode)
 
-documentation
+Get the location where start of the node occurs within the source code.
+The value returned by this function follows C array indexing such that
+the first byte corresponds to a value of '0'.
 """
 function node_startbyte(node::TSNode)
     start = ts_node_start_byte(node)
@@ -189,7 +194,9 @@ end
 """
     node_stopbyte(node::TSNode)
 
-documentation
+Get the location where the end of the node occurs within the source code.
+The value returned by this function follows C array indexing such that
+the first byte corresponds to a value of '0'.
 """
 function node_endbyte(node::TSNode)
     stop = ts_node_end_byte(node)
@@ -199,7 +206,8 @@ end
 """
     node_children(node::TSNode)
 
-documentation
+Get an array containing all the children of the node.
+Returns 'nothing' if the node does not have any children.
 """
 function node_children(node::TSNode)
     l = ts_node_child_count(node)

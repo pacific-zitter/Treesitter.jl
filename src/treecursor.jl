@@ -1,3 +1,4 @@
+# TODO: Refactor
 function LibTreesitter.TSTreeCursor(node::TSNode)
     return ts_tree_cursor_new(node)
 end
@@ -38,9 +39,4 @@ end
 function cursor_copy(T::TSTreeCursor)
     new_cursor = ts_tree_cursor_copy(Ref(T))
     return new_cursor
-end
-
-# Iterator interface.
-function Base.iterate(tree_cursor::TSTreeCursor)
-    cursor_next(tree_cursor)
 end
