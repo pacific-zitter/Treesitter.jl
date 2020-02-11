@@ -17,7 +17,6 @@ foreach(names(@__MODULE__, all = true)) do s
     if startswith(string(s), r"node|language|cursor|tree"i)
         @eval export $s
     end
-
 end
 
 end # module Treesitter

@@ -27,8 +27,7 @@ function parse_filewith(parser::Parser, filename::AbstractString)
     ts_parser_parse_string(parser.ptr, C_NULL, news, length(news))
 end
 
-#= 
-LANGUAGE =#
+
 """
     language_symbol_count(language::TSLanguage)
 
