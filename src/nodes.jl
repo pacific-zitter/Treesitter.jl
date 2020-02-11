@@ -110,3 +110,79 @@ function node_prev(node::TSNode)
     prev = ts_node_prev_sibling(node)
     node_isnull(prev) ? nothing : prev
 end # function
+
+"""
+    node_nextnamed(node::TSNode)
+
+documentation
+"""
+function node_nextnamed(node::TSNode)
+    next = ts_node_next_named_sibling(node)
+    node_isnull(next) ? nothing : next
+end
+
+"""
+    node_prevnamed(node::TSNode)
+
+documentation
+"""
+function node_prevnamed(node::TSNode)
+    prev = ts_node_prev_named_sibling(node)
+    node_isnull(prev) ? nothing : prev
+end
+
+"""
+    node_namedchild_count(node::TSNode)
+
+documentation
+"""
+function node_namedchild_count(node::TSNode)
+    n = ts_node_named_child_count(node)
+    Int(n)
+end
+
+"""
+    node_childby_fieldname(node::TSNode, fieldname::AbstractString)
+
+documentation
+"""
+function node_childby_fieldname(node::TSNode, fieldname::AbstractString)
+    child_node = ts_node_child_by_field_name(node, fieldname, length(fieldname))
+    node_isnull(child_node) ? nothing : child_node
+end
+
+"""
+    node_childby_fieldid(node::TSNode, id)
+
+documentation
+"""
+function node_childby_fieldid(node::TSNode, id)
+    child_node = ts_node_child_by_field_id(node, id)
+    node_isnull(child_node) ? nothing : child_node
+end
+
+"""
+    node_namedchild(node::TSNode, index)
+
+documentation
+"""
+function node_namedchild(node::TSNode, index)
+    cnode = ts_node_named_child(node, index-1)
+    node_isnull(cnode) ? nothing : cnode
+end
+
+"""
+    node_children(node::TSNode)
+
+documentation
+"""
+function node_children(node::TSNode)
+    l = ts_node_child_count(node)
+    l == 0 && return nothing
+
+    c = Vector{TSNode}(undef, l)
+    @inbounds for i = 1:l
+        c[i] = ts_node_child(node, i - 1)
+    end
+    c
+end

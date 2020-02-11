@@ -3,7 +3,7 @@ const TREE_SITTER_LANGUAGE_VERSION = 11
 const TREE_SITTER_MIN_COMPATIBLE_LANGUAGE_VERSION = 9
 const TSSymbol = UInt16
 const TSFieldId = UInt16
-const TSLanguage = Cvoid
+mutable struct TSLanguage end
 const TSParser = Cvoid
 const TSTree = Cvoid
 const TSQuery = Cvoid
