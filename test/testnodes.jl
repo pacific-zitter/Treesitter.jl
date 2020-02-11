@@ -13,11 +13,26 @@ function text_for_node(parser::Parser, node::TSNode)
 end
 
 root = ts_tree_root_node(tree)
-c_named = node_namedchildren(root)
-c = node_children(root)
 
+function walknodes(node)
+    content = nothing
+    try
+        content = node_children(node)
+    catch err
 
-foreach(c_named) do node
-    printstyled(node; bold=true);println()
-    println("Start byte: $(node_startbyte(node)) ", "End byte: $(node_endbyte(node))")
- end
+    end # try
+
+    function _it(chnl)
+        put!(chnl,content)
+        for n in content
+            for node_l in walknodes(n)
+                put!(chnl, node_l)
+            end
+        end
+    end
+    return Channel(_it)
+end
+
+y = walknodes(root)
+
+take!(y)

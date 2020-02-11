@@ -202,7 +202,6 @@ function node_endbyte(node::TSNode)
     stop = ts_node_end_byte(node)
 end
 
-
 """
     node_children(node::TSNode)
 
@@ -234,4 +233,9 @@ function node_namedchildren(node::TSNode)
         result[i] = node_namedchild(node, i)
     end
     return result
+end
+
+
+function node_firstchild_forbyte(node::TSNode)
+
 end
