@@ -2,6 +2,7 @@
 mutable struct Parser
     ptr::Ptr{Cvoid}
     language::Ptr{TSLanguage}
+    buffer::Union{Vector{UInt8}, Nothing}
     function Parser()
         obj = new(ts_parser_new())
         finalizer(obj) do x
@@ -19,6 +20,11 @@ function set_language(P::Parser, language)
     end
 end
 
-function (P::Parser)(s::AbstractString)
-    ts_parser_parse_string(P.ptr, C_NULL, s, length(s))
+function (P::Parser)(filename::AbstractString)
+    open(filename,"r") do io
+        s = read(io)
+        P.buffer = s
+        ts_parser_parse_string(P.ptr, C_NULL, s, length(s))
+    end
+    return nothing
 end

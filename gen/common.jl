@@ -1,13 +1,15 @@
 # Automatically generated using Clang.jl
+# Some customization for opaque struct types by Jeff Harrison.
+
 const TREE_SITTER_LANGUAGE_VERSION = 11
 const TREE_SITTER_MIN_COMPATIBLE_LANGUAGE_VERSION = 9
 const TSSymbol = UInt16
 const TSFieldId = UInt16
 mutable struct TSLanguage end
-const TSParser = Cvoid
-const TSTree = Cvoid
-const TSQuery = Cvoid
-const TSQueryCursor = Cvoid
+mutable struct TSParser end
+mutable struct TSTree end
+mutable struct TSQuery end
+mutable struct TSQueryCursor end
 
 @cenum TSInputEncoding::UInt32 begin
     TSInputEncodingUTF8 = 0
@@ -19,7 +21,6 @@ end
     TSSymbolTypeAnonymous = 1
     TSSymbolTypeAuxiliary = 2
 end
-
 
 struct TSPoint
     row::UInt32
@@ -60,7 +61,7 @@ struct TSInputEdit
 end
 
 struct TSNode
-    context::NTuple{4, UInt32}
+    context::NTuple{4,UInt32}
     id::Ptr{Cvoid}
     tree::Ptr{TSTree}
 end
@@ -68,7 +69,7 @@ end
 struct TSTreeCursor
     tree::Ptr{Cvoid}
     id::Ptr{Cvoid}
-    context::NTuple{2, UInt32}
+    context::NTuple{2,UInt32}
 end
 
 struct TSQueryCapture

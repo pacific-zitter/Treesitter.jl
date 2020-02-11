@@ -4,7 +4,7 @@ language = ccall((:tree_sitter_c,Treesitter.libtreesitter_c), Ptr{Cvoid},())
 
 parser = Treesitter.Parser()
 Treesitter.set_language(parser, language)
-source_code = read(joinpath(@__DIR__,"rationals.h"),String)
+source_code = read(joinpath(@__DIR__,"c_samples/rationals.h"),String)
 
 
 

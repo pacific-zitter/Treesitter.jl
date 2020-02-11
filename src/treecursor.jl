@@ -1,3 +1,9 @@
+struct TreeCursor
+    tscursor::Base.RefValue{TSTreeCursor}
+    current_node::Union{TSNode,Nothing}
+    next_node::Union{TSNode,Nothing}
+end
+
 function getcursor(node::TSNode)
     ts_tree_cursor_new(node)
 end

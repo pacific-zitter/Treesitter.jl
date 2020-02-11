@@ -167,9 +167,28 @@ end
 documentation
 """
 function node_namedchild(node::TSNode, index)
-    cnode = ts_node_named_child(node, index-1)
+    cnode = ts_node_named_child(node, index - 1)
     node_isnull(cnode) ? nothing : cnode
 end
+
+"""
+    node_startbyte(node::TSNode)
+
+documentation
+"""
+function node_startbyte(node::TSNode)
+    start = ts_node_start_byte(node)
+end
+
+"""
+    node_stopbyte(node::TSNode)
+
+documentation
+"""
+function node_endbyte(node::TSNode)
+    stop = ts_node_end_byte(node)
+end
+
 
 """
     node_children(node::TSNode)
