@@ -1,6 +1,5 @@
 using Treesitter
 
-
 parser = Parser()
 set_language(parser, tree_sitter_c())
 
