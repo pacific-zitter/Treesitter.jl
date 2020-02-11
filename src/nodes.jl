@@ -66,8 +66,13 @@ function node_isextra(node::TSNode)
     ts_node_is_extra(node)
 end
 
+"""
+    node_parent(node::TSNode)
+documentation
+"""
 function node_parent(node::TSNode)
-    ts_node_parent(node)
+    parent = ts_node_parent(node)
+    node_isnull(parent) ? nothing : parent
 end
 
 """
@@ -109,7 +114,7 @@ Return the previous sibling of a node if it exists. Nothing otherwise.
 function node_prev(node::TSNode)
     prev = ts_node_prev_sibling(node)
     node_isnull(prev) ? nothing : prev
-end # function
+end
 
 """
     node_nextnamed(node::TSNode)
@@ -142,6 +147,16 @@ function node_namedchild_count(node::TSNode)
 end
 
 """
+node_namedchild(node::TSNode, index)
+
+documentation
+"""
+function node_namedchild(node::TSNode, index)
+    cnode = ts_node_named_child(node, index - 1)
+    node_isnull(cnode) ? nothing : cnode
+end
+
+"""
     node_childby_fieldname(node::TSNode, fieldname::AbstractString)
 
 documentation
@@ -161,15 +176,6 @@ function node_childby_fieldid(node::TSNode, id)
     node_isnull(child_node) ? nothing : child_node
 end
 
-"""
-    node_namedchild(node::TSNode, index)
-
-documentation
-"""
-function node_namedchild(node::TSNode, index)
-    cnode = ts_node_named_child(node, index - 1)
-    node_isnull(cnode) ? nothing : cnode
-end
 
 """
     node_startbyte(node::TSNode)
@@ -201,7 +207,23 @@ function node_children(node::TSNode)
 
     c = Vector{TSNode}(undef, l)
     @inbounds for i = 1:l
-        c[i] = ts_node_child(node, i - 1)
+        c[i] = node_child(node, i)
     end
     c
+end
+
+"""
+    node_namedchildren(node::TSNode)
+
+Return all children for which there exists a token name.
+"""
+function node_namedchildren(node::TSNode)
+    n = node_namedchild_count(node)
+    n == 0 && return nothing
+
+    result = Vector{TSNode}(undef, n)
+    @inbounds for i = 1:n
+        result[i] = node_namedchild(node, i)
+    end
+    return result
 end
