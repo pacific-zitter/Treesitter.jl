@@ -3,7 +3,7 @@ using Reexport
 @reexport using libtreesitter_jll
 
 using CEnum
-
+include(joinpath(@__DIR__, "..", "gen", "libtreesitter_h.jl"))
 include(joinpath(@__DIR__, "..", "gen", "libtreesitter_c.jl"))
 
 # export everything

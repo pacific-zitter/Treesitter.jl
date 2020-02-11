@@ -1,6 +1,5 @@
 # Julia wrapper for header: api.h
 # Automatically generated using Clang.jl
-include("libtreesitter_h.jl")
 
 function ts_parser_new()
     ccall((:ts_parser_new, libtreesitter), Ptr{TSParser}, ())

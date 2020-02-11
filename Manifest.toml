@@ -70,8 +70,8 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[libtreesitter_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "d3db7c6fd6a8ab664120e7f2383222517956ed70"
+git-tree-sha1 = "c2eb166e6bbb5c58b49956369d42c4be793a5cde"
 repo-rev = "master"
 repo-url = "https://github.com/pacific-zitter/libtreesitter_jll.jl.git"
 uuid = "71c4d463-9f53-531e-9abc-8645b34ce656"
-version = "0.1.0+0"
+version = "0.1.0"
