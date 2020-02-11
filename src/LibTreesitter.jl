@@ -4,8 +4,7 @@ using Reexport
 
 using CEnum
 
-include(joinpath(@__DIR__, "..", "gen", "common.jl"))
-include(joinpath(@__DIR__, "..", "gen", "api.jl"))
+include(joinpath(@__DIR__, "..", "gen", "libtreesitter_c.jl"))
 
 # export everything
 foreach(names(@__MODULE__, all = true)) do s
