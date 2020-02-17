@@ -6,7 +6,7 @@ include("LibTreesitter.jl")
 
 @reexport using .LibTreesitter
 
-tree_sitter_c() = ccall((:tree_sitter_c, libtreesitter_c), Ptr{Cvoid}, ())
+tree_sitter_c() = ccall((:tree_sitter_c, LibTreesitter.libtreesitter_c), Ptr{Cvoid}, ())
 
 include("parser.jl")
 include("nodes.jl")

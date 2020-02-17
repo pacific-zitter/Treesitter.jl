@@ -235,7 +235,8 @@ function node_namedchildren(node::TSNode)
     return result
 end
 
-
-function node_firstchild_forbyte(node::TSNode)
-
+function node_indices(node::TSNode)
+    start = node_startbyte(node) + 1
+    stop = node_endbyte(node)
+    return start:stop
 end

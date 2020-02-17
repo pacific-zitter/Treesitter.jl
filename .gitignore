@@ -1,4 +1,4 @@
 .DS_Store
 /dev/
-/deps/*/
 /.*/
+Manifest.toml

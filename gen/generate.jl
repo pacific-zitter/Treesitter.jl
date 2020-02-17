@@ -12,8 +12,8 @@ ctx = init(
     common_file = "common.jl",
     header_wrapped = (root, current) -> root == current,
     header_library = (x...) -> "libtreesitter",
-    clang_args = ["-std=c11"],
+    clang_args = ["-std=gnu99"],
     clang_includes = [CLANG_INCLUDE],
 )
 
-run(ctx)
+run(ctx, false)

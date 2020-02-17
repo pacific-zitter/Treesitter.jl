@@ -1,8 +1,6 @@
 module LibTreesitter
-export libtreesitter, libtreesitter_c
-
 using CEnum
-using libtreesitter_jll
+using tree_sitter_c_jll
 
 include(joinpath(@__DIR__, "..", "gen", "libtreesitter_h.jl"))
 include(joinpath(@__DIR__, "..", "gen", "libtreesitter_c.jl"))
