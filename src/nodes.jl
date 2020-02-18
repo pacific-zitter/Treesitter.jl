@@ -57,6 +57,15 @@ function node_isnamed(node::TSNode)
 end
 
 """
+    node_ismissing(node::TSNode)
+
+Check if the node is *missing*. Missing nodes are inserted by the parser in
+order to recover from certain kinds of syntax errors.
+"""
+function node_ismissing(node::TSNode)
+    ts_node_is_missing(node)
+end
+"""
     node_isextra(node::TSNode)
 
 Check if the node is *extra*. Extra nodes represent things like comments,

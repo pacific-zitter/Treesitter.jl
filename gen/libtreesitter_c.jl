@@ -200,7 +200,13 @@ function ts_tree_get_changed_ranges(old_tree, new_tree, length)
 end
 
 function ts_tree_print_dot_graph(arg1, arg2)
-    ccall((:ts_tree_print_dot_graph, libtreesitter), Cvoid, (Ptr{TSTree}, Ptr{Libc.FILE}), arg1, arg2)
+    ccall(
+        (:ts_tree_print_dot_graph, libtreesitter),
+        Cvoid,
+        (Ptr{TSTree}, Ptr{Libc.FILE}),
+        arg1,
+        arg2,
+    )
 end
 
 function ts_node_type(arg1)

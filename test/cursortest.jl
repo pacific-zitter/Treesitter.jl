@@ -33,14 +33,14 @@ cursor.current_text = view(
     node_startbyte(cursor.current_node)+1:node_endbyte(cursor.current_node),
 )
 
-# TODO CHANGE TO USE NODES INSTEAD OF CURSORS.
+# TODO change to use nodes insea
 function byterange(node::TSNode)
     start = node_startbyte(node) + 1
     stop = node_endbyte(node)
     return start:stop
 end
 
-# TODO CHANGE TO USE NODES INSTEAD OF CURSORS.
+# TODO change to use nodes instead of cursors.
 function cursor_next!(cursor::Cursor)
     isnothing(cursor.next_sibling) && return
 
@@ -54,7 +54,7 @@ function cursor_next!(cursor::Cursor)
     cursor.current_text = view(cursor.text, bytes)
 end
 
-# TODO CHANGE TO USE NODES INSTEAD OF CURSORS.
+# TODO change to use nodes instead of cursors.
 function cursor_firstchild!(cursor::Cursor)
     isnothing(cursor.first_child) && return
 
