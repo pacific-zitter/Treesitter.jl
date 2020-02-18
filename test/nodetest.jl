@@ -2,7 +2,10 @@ using Treesitter
 
 parser = Parser()
 l = set_language(parser, tree_sitter_c())
-tree = Treesitter.parse_filewith(parser,joinpath(@__DIR__,"c_samples/easystruct.h"))
+tree = Treesitter.parse_filewith(
+    parser,
+    joinpath(@__DIR__, "c_samples/easystruct.h"),
+)
 rnode = tree_getroot(tree)
 
 nodetype = node_type(rnode)
@@ -12,9 +15,8 @@ nbstop = node_endbyte(rnode)
 
 # Length of node text is equal to the number of bytes in the raw sourcecode.
 slen = parser.buffer |> length
-nlen = nbstop-nbstart |> Int
+nlen = nbstop - nbstart |> Int
 @assert slen == nlen
-
 
 root_children = node_children(rnode)
 @assert length(root_children) == 4

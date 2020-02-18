@@ -188,7 +188,6 @@ function node_childby_fieldid(node::TSNode, id)
     node_isnull(child_node) ? nothing : child_node
 end
 
-
 """
     node_startbyte(node::TSNode)
 
@@ -244,8 +243,49 @@ function node_namedchildren(node::TSNode)
     return result
 end
 
+"""
+    node_indices(node)
+Return the range of text encapsulated by the given node.
+"""
 function node_indices(node::TSNode)
     start = node_startbyte(node) + 1
     stop = node_endbyte(node)
     return start:stop
+end
+
+"""
+    node_text(txt, node)
+Return a substring corresponding to the text that is associated with the given
+node.
+"""
+function node_text(txt::AbstractString, node::TSNode)
+    NI = node_indices(node)
+    txt[NI]
+end
+
+"""
+    node_rootof(tree)
+Return the node corresponding to the root of the parsed syntax tree.
+"""
+function node_rootof(tree::Ptr{TSTree})::TSNode
+    ts_tree_root_node(tree)
+end
+
+"""
+    node_startpoint(node::TSNode)
+
+Get the node's start position in terms of rows and columns.
+"""
+function node_startpoint(node::TSNode)
+    pt = ts_node_start_point(node)
+    npt = TSPoint(pt.row + 1, pt.column + 1)
+end
+
+"""
+    node_endpoint(node::TSNode)
+
+Get the node's end position in terms of rows and columns.
+"""
+function node_endpoint(node::TSNode)
+    ts_node_end_point(node)
 end

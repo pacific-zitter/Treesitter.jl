@@ -45,7 +45,6 @@ end
     TSLogTypeLex = 1
 end
 
-
 struct TSLogger
     payload::Ptr{Cvoid}
     log::Ptr{Cvoid}
@@ -89,7 +88,6 @@ end
     TSQueryPredicateStepTypeCapture = 1
     TSQueryPredicateStepTypeString = 2
 end
-
 
 struct TSQueryPredicateStep
     type::TSQueryPredicateStepType

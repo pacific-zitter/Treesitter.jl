@@ -1,6 +1,6 @@
 module Treesitter
 using Reexport
-export Parser, set_language, tree_sitter_c
+export Parser, parse_filewith, parse_string, set_language, tree_sitter_c
 
 include("LibTreesitter.jl")
 

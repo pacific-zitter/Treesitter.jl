@@ -27,7 +27,16 @@ function parse_filewith(parser::Parser, filename::AbstractString)
     ts_parser_parse_string(parser.ptr, C_NULL, news, length(news))
 end
 
+function parse_string(parser::Parser, codestring)
+    out_tree = ts_parser_parse_string(
+        parser.ptr,
+        Ptr{Cvoid}(),
+        codestring,
+        length(codestring),
+    )
 
+    return out_tree
+end
 """
     language_symbol_count(language::TSLanguage)
 
