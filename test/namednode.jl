@@ -5,7 +5,7 @@ set_language(parser, tree_sitter_c())
 
 tree = Treesitter.parse_filewith(
     parser,
-    joinpath(@__DIR__, "c_samples/easystruct.h"),
+    joinpath(@__DIR__, "corpus/easystruct.h"),
 )
 nstring = parser.buffer |> String
 rtcrsr = tree_getroot(tree)

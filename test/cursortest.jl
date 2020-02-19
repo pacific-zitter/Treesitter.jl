@@ -2,7 +2,7 @@ using Treesitter
 
 parser = Parser()
 set_language(parser, tree_sitter_c())
-codestring = read(joinpath(@__DIR__, "c_samples/easystruct.h"), String)
+codestring = read(joinpath(@__DIR__, "corpus/easystruct.h"), String)
 
 tree =
     ts_parser_parse_string(parser.ptr, C_NULL, codestring, length(codestring))

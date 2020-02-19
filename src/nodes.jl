@@ -289,3 +289,17 @@ Get the node's end position in terms of rows and columns.
 function node_endpoint(node::TSNode)
     ts_node_end_point(node)
 end
+"""
+    NodeLocation
+
+Represents the start and stop location of a node within the source code.
+start::TSPoint = [:row =>, :col=> ], stop::TSPoint = [:row =>, :col=> ]
+"""
+mutable struct NodeLocation
+    start::TSPoint
+    stop::TSPoint
+end
+
+function NodeLocation(node::TSNode)
+    NodeLocation(node_startpoint(node), node_endpoint(node))
+end
