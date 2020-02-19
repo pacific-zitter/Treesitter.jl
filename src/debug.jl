@@ -27,7 +27,7 @@ function parse_corpus(corpus_name)
     dash_locs = map(x -> occursin(r"\-{3,}", x), corpus) |> findall
 
     # odd numbered lines contain the opening line of '='.
-    test_names = equalslocs[1:2:end] .+ 1 .|> i -> getindex(crp, i)
+    test_names = equalslocs[1:2:end] .+ 1 .|> i -> getindex(corpus, i)
 
     code_starts = equalslocs[2:2:end] .+ 1
     code_stops = dash_locs .- 1

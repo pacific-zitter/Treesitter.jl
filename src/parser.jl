@@ -1,11 +1,8 @@
-# parser.jls
-#=
-Parser helper functions.
-=#
-mutable struct Parser{L<:TSLanguage}
+# Parser helper functions.
+mutable struct Parser
     ptr::Ptr{Cvoid}
-    language::Ptr{L}
-    function Parser{L}(lang::L) where {L<:TSLanguage}
+    language::Ptr{TSLanguage}
+    function Parser()
         obj = new(ts_parser_new())
         finalizer(obj) do x
             ts_parser_delete(x.ptr)
@@ -22,6 +19,12 @@ function set_language(P::Parser, language)
     end
 end
 
+function Parser(language::Ptr{TSLanguage})
+    p = Parser()
+    set_language(p, language)
+    return p
+end
+
 function parse_filewith(parser::Parser, filename::AbstractString)
     s = read(filename)
     parser.buffer = deepcopy(s)
@@ -30,7 +33,10 @@ function parse_filewith(parser::Parser, filename::AbstractString)
 end
 
 function parse_string(parser::Parser, codestring)
-    out_tree = ts_parser_parse_string(parser.ptr, Ptr{Cvoid}(), codestring, length(codestring))
-
-    return out_tree
+    treeptr = ts_parser_parse_string(parser.ptr, Ptr{Cvoid}(), codestring, length(codestring))
+    tree = Tree()
+    tree.root_node = node_rootof(treeptr)
+    tree.ptr = treeptr
+    tree.language = parser.language
+    return tree
 end

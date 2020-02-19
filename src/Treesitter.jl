@@ -1,17 +1,18 @@
 module Treesitter
 using Reexport
 export Parser, parse_filewith, parse_string, set_language, tree_sitter_c
-export show, NodeLocation
+export show, NodeLocation, Tree
 include("LibTreesitter.jl")
 
 @reexport using .LibTreesitter
 
-tree_sitter_c() = ccall((:tree_sitter_c, LibTreesitter.libtreesitter_c), Ptr{Cvoid}, ())
+tree_sitter_c() = ccall((:tree_sitter_c, LibTreesitter.libtreesitter_c), Ptr{TSLanguage}, ())
 
-include("parser.jl")
 include("nodes.jl")
 include("treecursor.jl")
 
+include("tree.jl")
+include("parser.jl")
 include("debug.jl")
 
 # Export all names starting with node, language, cursor, or tree.
